@@ -14,6 +14,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Gotham Rounded', sans-serif;
+            color: #3E2F3C
         }
 
         body {
@@ -47,18 +48,26 @@
             padding: 10px 20px;
             cursor: pointer;
             font-weight: bold;
-            color: #333;
             transition: background-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #d2e6ff;
         }
 
         .tab.active {
             background-color: #c5d7ff;
         }
 
+        .tab.active:hover {
+            background-color: #acc7ff;
+        }
+
         .title {
             font-size: 24px;
-            color: #333;
-            margin: 20px 0px 20px 10px;
+            background-color: #ffe0e0;
+            border-radius: 15px;
+            padding: 15px;
         }
 
         .content {
@@ -71,8 +80,8 @@
 
         .encryption-container {
             display: flex;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .input-area {
@@ -112,7 +121,6 @@
             border-radius: 15px;
             border: none;
             background-color: #ffd9c0;
-            color: #333;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -126,8 +134,7 @@
             background-color: #e0ffea;
             border-radius: 15px;
             padding: 15px;
-            margin-top: 20px;
-            min-height: 60px;
+            margin-top: 10px;
             word-wrap: break-word;
         }
 
@@ -135,7 +142,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .video-card {
@@ -177,11 +184,10 @@
 
         .video-description {
             font-size: 14px;
-            color: #666;
         }
 
         .discussion-topics {
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .topic {
@@ -206,6 +212,48 @@
             font-size: 12px;
             color: #888;
             font-style: italic;
+        }
+
+        .copy-notification {
+            position: absolute;
+            opacity: 0;
+            font-size: 16px;
+            font-weight: bold;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translate(-50%, -80%);
+        }
+
+        .copy-notification.fade-out {
+            opacity: 0;
+            transform: translate(-50%, -100%);
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            80% {
+                transform: translateX(-5px);
+            }
+
+            40%,
+            60% {
+                transform: translateX(5px);
+            }
         }
 
         @media (max-width: 768px) {
@@ -261,6 +309,8 @@
                     <button class="btn" onclick="bruteForce()">Brute Force</button>
                     <button class="btn" onclick="decrypt()">Decrypt</button>
                     <button class="btn" onclick="encrypt()">Encrypt</button>
+                    <button class="btn" onclick="copyResult(event)">Copy</button>
+                    <div id="copyNotification" class="copy-notification">Copied!</div>
                 </div>
             </div>
 
@@ -273,11 +323,13 @@
             <div class="video-grid">
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Au8wDgTL7bE" frameborder="0"
-                            allowfullscreen></iframe>                    </div>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/6-JjHa-qLPk" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
                     <div class="video-info">
                         <div class="video-title">Introduction to Encryption</div>
-                        <div class="video-description">Learn the basics of how encryption protects your data online.
+                        <div class="video-description">Explains cryptography, 256-bit encryption, public/private keys,
+                            SSL, TLS, and HTTPS.
                         </div>
                     </div>
                 </div>
@@ -289,30 +341,33 @@
                     </div>
                     <div class="video-info">
                         <div class="video-title">Caesar Cipher Explained</div>
-                        <div class="video-description">The history and mathematics behind the classic Caesar cipher.
+                        <div class="video-description">Explains the Caesar cipher and how it was broken with frequency
+                            analysis.
                         </div>
                     </div>
                 </div>
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZghMPWGXexs" frameborder="0"
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/NuyzuNBFWxQ" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
-                        <div class="video-title">Modern Encryption Methods</div>
-                        <div class="video-description">Explore RSA, AES, and other current encryption standards.</div>
+                        <div class="video-title">Cryptography Concepts</div>
+                        <div class="video-description">Hands-on Node.js tutorial covering hashing, encryption, signing,
+                            and more in cryptography.</div>
                     </div>
                 </div>
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/3a8pOrAd6YI" frameborder="0"
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/TImdsUglGv4" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
                         <div class="video-title">Breaking Encryption</div>
-                        <div class="video-description">Techniques used to crack various encryption methods.</div>
+                        <div class="video-description">Explores encryption in text messages, the privacy vs. security
+                            debate, and controversial backdoors.</div>
                     </div>
                 </div>
 
@@ -385,45 +440,112 @@
             document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
         }
 
+        let animating = false;
+
+
+        function copyResult(event) {
+            if (animating) return;
+
+            const resultElement = document.getElementById('result');
+            const notification = document.getElementById('copyNotification');
+
+            if (!resultElement || !notification) return;
+
+            const resultText = resultElement.innerText.trim();
+            // if you understand what the thing below me does, im sorry :skull:
+            const message = resultText && resultText !== "Result" ? "Copied!" : "Why would you copy this?";
+
+            if (resultText && resultText !== "Result") {
+                navigator.clipboard.writeText(resultText).catch(err => console.error("Copy failed:", err));
+            }
+
+            const x = event.clientX;
+            const y = event.clientY - 20;
+
+            notification.innerText = message;
+            notification.style.left = `${x}px`;
+            notification.style.top = `${y}px`;
+
+            animating = true;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.add('fade-out');
+            }, 500);
+
+            setTimeout(() => {
+                notification.classList.remove('show', 'fade-out');
+                animating = false;
+            }, 1000);
+        }
+
+        let emptyInputCount = 0;
+
+        function shakeElement(element) {
+            element.classList.add('shake');
+            setTimeout(() => {
+                element.classList.remove('shake');
+            }, 500);
+        }
+
+        function handleEmptyInput(inputElement) {
+            emptyInputCount++;
+
+            if (emptyInputCount >= 20) {
+                inputElement.placeholder = "bro...";
+            } else if (emptyInputCount >= 5) {
+                inputElement.placeholder = "ENTER AN INPUT HERE";
+            }
+
+            shakeElement(inputElement);
+        }
+
+        function resetPlaceholder(inputElement) {
+            emptyInputCount = 0;
+            inputElement.placeholder = "Enter your message here";
+        }
+
         function encrypt() {
-            const text = document.getElementById('message').value;
+            const textInput = document.getElementById('message');
+            const text = textInput.value;
             const shift = parseInt(document.getElementById('shift').value) || 3;
 
-            if (!text) {
-                alert('Please enter a message to encrypt');
+            if (!text.trim()) {
+                handleEmptyInput(textInput);
                 return;
             }
 
-            const result = caesarCipher(text, shift);
-            document.getElementById('result').innerText = result;
+            resetPlaceholder(textInput);
+            document.getElementById('result').innerText = caesarCipher(text, shift);
         }
 
         function decrypt() {
-            const text = document.getElementById('message').value;
+            const textInput = document.getElementById('message');
+            const text = textInput.value;
             const shift = parseInt(document.getElementById('shift').value) || 3;
 
-            if (!text) {
-                alert('Please enter a message to decrypt');
+            if (!text.trim()) {
+                handleEmptyInput(textInput);
                 return;
             }
 
-            const result = caesarCipher(text, -shift);
-            document.getElementById('result').innerText = result;
+            resetPlaceholder(textInput);
+            document.getElementById('result').innerText = caesarCipher(text, -shift);
         }
 
         function bruteForce() {
-            const text = document.getElementById('message').value;
+            const textInput = document.getElementById('message');
+            const text = textInput.value;
 
-            if (!text) {
-                alert('Please enter a message to brute force');
+            if (!text.trim()) {
+                handleEmptyInput(textInput);
                 return;
             }
 
+            resetPlaceholder(textInput);
             let results = '<strong>Brute Force Results:</strong><br>';
-
             for (let i = 1; i <= 25; i++) {
-                const result = caesarCipher(text, -i);
-                results += `<strong>Shift ${i}:</strong> ${result}<br>`;
+                results += `<strong>Shift ${i}:</strong> ${caesarCipher(text, -i)}<br>`;
             }
 
             document.getElementById('result').innerHTML = results;
