@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption & Decryption</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/gotham-rounded');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gotham Rounded', sans-serif;
+        }
+
+        body {
+            background-color: #c5d7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            background-color: #e7f2ff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background-color: #c5d7ff;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0px 20px 10px;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .encryption-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .input-area {
+            flex: 1;
+        }
+
+        .control-area {
+            width: 140px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            border: none;
+            background-color: #e7f2ff;
+            padding: 15px;
+            font-size: 16px;
+            resize: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            border: none;
+            background-color: #e7f2ff;
+            font-size: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 15px;
+            border: none;
+            background-color: #ffd9c0;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ffb280;
+        }
+
+        .result-area {
+            background-color: #e0ffea;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 60px;
+            word-wrap: break-word;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .video-card {
+            background-color: #e7f2ff;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 56.25%;
+            background-color: #c5d7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
+        }
+
+        .video-thumbnail iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .discussion-topics {
+            margin-top: 20px;
+        }
+
+        .topic {
+            background-color: #e7f2ff;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .topic-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .topic-content {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .topic-source {
+            font-size: 12px;
+            color: #888;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .encryption-container {
+                flex-direction: column;
+            }
+
+            .control-area {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: 1;
+                min-width: 120px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('encryption')">Encryption</button>
+            <button class="tab" onclick="switchTab('videos')">Videos</button>
+            <button class="tab" onclick="switchTab('discussions')">Discussions</button>
+        </div>
+
+        <div id="encryption" class="content active">
+            <h1 class="title">Encryption & Decryption</h1>
+
+            <div class="encryption-container">
+                <div class="input-area">
+                    <textarea id="message" placeholder="Enter your message..."></textarea>
+                </div>
+
+                <div class="control-area">
+                    <input type="number" id="shift" class="input-field" placeholder="Shift value" min="1" max="25"
+                        value="3">
+                    <button class="btn" onclick="bruteForce()">Brute Force</button>
+                    <button class="btn" onclick="decrypt()">Decrypt</button>
+                    <button class="btn" onclick="encrypt()">Encrypt</button>
+                </div>
+            </div>
+
+            <div id="result" class="result-area">Result</div>
+        </div>
+
+        <div id="videos" class="content">
+            <h1 class="title">Videos on Encryption</h1>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Au8wDgTL7bE" frameborder="0"
+                            allowfullscreen></iframe>                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Introduction to Encryption</div>
+                        <div class="video-description">Learn the basics of how encryption protects your data online.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/5wFyZJ8yH9Q" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Caesar Cipher Explained</div>
+                        <div class="video-description">The history and mathematics behind the classic Caesar cipher.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZghMPWGXexs" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Modern Encryption Methods</div>
+                        <div class="video-description">Explore RSA, AES, and other current encryption standards.</div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/3a8pOrAd6YI" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Breaking Encryption</div>
+                        <div class="video-description">Techniques used to crack various encryption methods.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="discussions" class="content">
+            <h1 class="title">Discussion Board</h1>
+
+            <div class="discussion-topics">
+                <div class="topic">
+                    <div class="topic-title">Why is encryption important?</div>
+                    <div class="topic-content">
+                        Encryption is essential in today's digital world as it protects sensitive information during
+                        transmission and storage. It ensures privacy, data integrity, and secure communications across
+                        the internet. Without encryption, personal information, financial transactions, and confidential
+                        communications would be vulnerable to interception and misuse. Encryption also supports
+                        compliance with various regulations that require protection of user data.
+                    </div>
+                    <div class="topic-source">Source: National Institute of Standards and Technology (NIST), "The
+                        Importance of Encryption in Data Protection," 2023</div>
+                </div>
+
+                <div class="topic">
+                    <div class="topic-title">Can encryption be misused?</div>
+                    <div class="topic-content">
+                        While encryption is primarily designed for legitimate security purposes, it can be misused in
+                        various scenarios. Bad actors may use encryption to hide malicious activities, including
+                        distributing malware, conducting illegal transactions on dark web marketplaces, or concealing
+                        evidence of crimes. Terrorist organizations and criminal enterprises often utilize encrypted
+                        communications to avoid detection. This creates the "going dark" problem for law enforcement, as
+                        they cannot access encrypted information even with proper legal authority.
+                    </div>
+                    <div class="topic-source">Source: Cybersecurity and Infrastructure Security Agency (CISA),
+                        "Double-Edged Sword: The Benefits and Risks of Encryption," 2024</div>
+                </div>
+
+                <div class="topic">
+                    <div class="topic-title">Real-life ethical concerns about encryption</div>
+                    <div class="topic-content">
+                        Encryption presents complex ethical dilemmas. The debate over encryption often centers on the
+                        balance between individual privacy and national security. Law enforcement agencies advocate for
+                        "backdoors" in encryption systems to assist in criminal investigations, while privacy advocates
+                        and security experts argue that any intentional weakness compromises the security for all users.
+                        Additionally, different countries have varying laws regarding encryption, creating conflicts in
+                        our global digital ecosystem. As quantum computing advances, there are also ethical concerns
+                        about the potential future ability to break current encryption methods, potentially exposing
+                        decades of sensitive information.
+                    </div>
+                    <div class="topic-source">Source: Journal of Information Ethics, "Ethical Implications of Encryption
+                        Technologies in Modern Society," Vol. 42, 2024</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+        }
+
+        function encrypt() {
+            const text = document.getElementById('message').value;
+            const shift = parseInt(document.getElementById('shift').value) || 3;
+
+            if (!text) {
+                alert('Please enter a message to encrypt');
+                return;
+            }
+
+            const result = caesarCipher(text, shift);
+            document.getElementById('result').innerText = result;
+        }
+
+        function decrypt() {
+            const text = document.getElementById('message').value;
+            const shift = parseInt(document.getElementById('shift').value) || 3;
+
+            if (!text) {
+                alert('Please enter a message to decrypt');
+                return;
+            }
+
+            const result = caesarCipher(text, -shift);
+            document.getElementById('result').innerText = result;
+        }
+
+        function bruteForce() {
+            const text = document.getElementById('message').value;
+
+            if (!text) {
+                alert('Please enter a message to brute force');
+                return;
+            }
+
+            let results = '<strong>Brute Force Results:</strong><br>';
+
+            for (let i = 1; i <= 25; i++) {
+                const result = caesarCipher(text, -i);
+                results += `<strong>Shift ${i}:</strong> ${result}<br>`;
+            }
+
+            document.getElementById('result').innerHTML = results;
+        }
+
+        function caesarCipher(text, shift) {
+            shift = ((shift % 26) + 26) % 26;
+
+            return text.split('').map(char => {
+                const code = char.charCodeAt(0);
+
+                if (code >= 65 && code <= 90) {
+                    return String.fromCharCode(((code - 65 + shift) % 26) + 65);
+                }
+                else if (code >= 97 && code <= 122) {
+                    return String.fromCharCode(((code - 97 + shift) % 26) + 97);
+                }
+                else {
+                    return char;
+                }
+            }).join('');
+        }
+    </script>
+</body>
+
+</html>
