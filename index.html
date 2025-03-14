@@ -26,13 +26,14 @@
         }
 
         .container {
-            background-color: white;
+            position: relative;
             border-radius: 20px;
             width: 90%;
             max-width: 600px;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin: 10px;
+            background: rgb(255, 255, 255);
         }
 
         .tabs {
@@ -238,6 +239,41 @@
             animation: shake 0.5s ease-in-out;
         }
 
+        .top-elements {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .top-left img {
+            width: 100px;
+            height: auto;
+        }
+
+        .top-left,
+        .top-right {
+            padding: 10px;
+        }
+
+        .logo {
+            height: 70px;
+        }
+
+        .container-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            align-items: center;
+        }
+        .container-footer p {
+margin-left: 10px;
+margin-right: 10px;
+
+font-size: 8px;
+        }
         @keyframes shake {
 
             0%,
@@ -422,6 +458,11 @@
                 </div>
             </div>
         </div>
+        <div class="container-footer">
+        <img src="logolol.svg" class="logo">
+        <p>@adam @venalyn</p>
+
+    </div>
     </div>
 
     <script>
