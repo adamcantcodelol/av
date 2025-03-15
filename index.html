@@ -23,6 +23,15 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background-image: url('icons.svg'), url('icons.svg');
+            background-size: 200vw;
+            background-repeat: repeat-x;
+            animation: scroll-background 30s linear infinite;
+        }
+
+        .scroll-background {
+            height: 200vh;
+            width: 200vw;
         }
 
         .container {
@@ -34,6 +43,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin: 10px;
             background: rgb(255, 255, 255);
+            border: #3E2F3C solid 5px;
+            animation: tilt-container 20s ease-in-out infinite;
         }
 
         .tabs {
@@ -50,6 +61,7 @@
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s;
+            border: #3E2F3C solid 5px;
         }
 
         .tab:hover {
@@ -105,6 +117,7 @@
             padding: 15px;
             font-size: 16px;
             resize: none;
+            border: #3E2F3C solid 5px;
         }
 
         .input-field {
@@ -114,6 +127,7 @@
             border: none;
             background-color: #e7f2ff;
             font-size: 16px;
+            border: #3E2F3C solid 5px;
         }
 
         .btn {
@@ -125,6 +139,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
+            border: #3E2F3C solid 5px;
         }
 
         .btn:hover {
@@ -196,6 +211,7 @@
             border-radius: 15px;
             padding: 15px;
             margin-bottom: 15px;
+            border: #3E2F3C solid 5px;
         }
 
         .topic-title {
@@ -268,12 +284,45 @@
             margin-top: 10px;
             align-items: center;
         }
-        .container-footer p {
-margin-left: 10px;
-margin-right: 10px;
 
-font-size: 8px;
+        .container-footer p {
+            margin: 0 10px;
+            background-size: 1080px;
+            font-size: 10px;
         }
+
+        @keyframes tilt-container {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-0.25deg);
+            }
+
+            50% {
+                transform: rotate(0.25deg);
+            }
+
+            75% {
+                transform: rotate(-0.25deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes scroll-background {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
         @keyframes shake {
 
             0%,
@@ -364,7 +413,8 @@ font-size: 8px;
                     </div>
                     <div class="video-info">
                         <div class="video-title">Introduction to Encryption</div>
-                        <div class="video-description">Explains cryptography, 256-bit encryption, public/private keys,
+                        <div class="video-description">Explains cryptography, 256-bit encryption, public/private
+                            keys,
                             SSL, TLS, and HTTPS.
                         </div>
                     </div>
@@ -377,7 +427,8 @@ font-size: 8px;
                     </div>
                     <div class="video-info">
                         <div class="video-title">Caesar Cipher Explained</div>
-                        <div class="video-description">Explains the Caesar cipher and how it was broken with frequency
+                        <div class="video-description">Explains the Caesar cipher and how it was broken with
+                            frequency
                             analysis.
                         </div>
                     </div>
@@ -390,7 +441,8 @@ font-size: 8px;
                     </div>
                     <div class="video-info">
                         <div class="video-title">Cryptography Concepts</div>
-                        <div class="video-description">Hands-on Node.js tutorial covering hashing, encryption, signing,
+                        <div class="video-description">Hands-on Node.js tutorial covering hashing, encryption,
+                            signing,
                             and more in cryptography.</div>
                     </div>
                 </div>
@@ -402,7 +454,8 @@ font-size: 8px;
                     </div>
                     <div class="video-info">
                         <div class="video-title">Breaking Encryption</div>
-                        <div class="video-description">Explores encryption in text messages, the privacy vs. security
+                        <div class="video-description">Explores encryption in text messages, the privacy vs.
+                            security
                             debate, and controversial backdoors.</div>
                     </div>
                 </div>
@@ -418,8 +471,10 @@ font-size: 8px;
                     <div class="topic-title">Why is encryption important?</div>
                     <div class="topic-content">
                         Encryption is essential in today's digital world as it protects sensitive information during
-                        transmission and storage. It ensures privacy, data integrity, and secure communications across
-                        the internet. Without encryption, personal information, financial transactions, and confidential
+                        transmission and storage. It ensures privacy, data integrity, and secure communications
+                        across
+                        the internet. Without encryption, personal information, financial transactions, and
+                        confidential
                         communications would be vulnerable to interception and misuse. Encryption also supports
                         compliance with various regulations that require protection of user data.
                     </div>
@@ -430,11 +485,14 @@ font-size: 8px;
                 <div class="topic">
                     <div class="topic-title">Can encryption be misused?</div>
                     <div class="topic-content">
-                        While encryption is primarily designed for legitimate security purposes, it can be misused in
+                        While encryption is primarily designed for legitimate security purposes, it can be misused
+                        in
                         various scenarios. Bad actors may use encryption to hide malicious activities, including
-                        distributing malware, conducting illegal transactions on dark web marketplaces, or concealing
+                        distributing malware, conducting illegal transactions on dark web marketplaces, or
+                        concealing
                         evidence of crimes. Terrorist organizations and criminal enterprises often utilize encrypted
-                        communications to avoid detection. This creates the "going dark" problem for law enforcement, as
+                        communications to avoid detection. This creates the "going dark" problem for law
+                        enforcement, as
                         they cannot access encrypted information even with proper legal authority.
                     </div>
                     <div class="topic-source">Source: Cybersecurity and Infrastructure Security Agency (CISA),
@@ -444,25 +502,30 @@ font-size: 8px;
                 <div class="topic">
                     <div class="topic-title">Real-life ethical concerns about encryption</div>
                     <div class="topic-content">
-                        Encryption presents complex ethical dilemmas. The debate over encryption often centers on the
-                        balance between individual privacy and national security. Law enforcement agencies advocate for
-                        "backdoors" in encryption systems to assist in criminal investigations, while privacy advocates
-                        and security experts argue that any intentional weakness compromises the security for all users.
-                        Additionally, different countries have varying laws regarding encryption, creating conflicts in
+                        Encryption presents complex ethical dilemmas. The debate over encryption often centers on
+                        the
+                        balance between individual privacy and national security. Law enforcement agencies advocate
+                        for
+                        "backdoors" in encryption systems to assist in criminal investigations, while privacy
+                        advocates
+                        and security experts argue that any intentional weakness compromises the security for all
+                        users.
+                        Additionally, different countries have varying laws regarding encryption, creating conflicts
+                        in
                         our global digital ecosystem. As quantum computing advances, there are also ethical concerns
                         about the potential future ability to break current encryption methods, potentially exposing
                         decades of sensitive information.
                     </div>
-                    <div class="topic-source">Source: Journal of Information Ethics, "Ethical Implications of Encryption
+                    <div class="topic-source">Source: Journal of Information Ethics, "Ethical Implications of
+                        Encryption
                         Technologies in Modern Society," Vol. 42, 2024</div>
                 </div>
             </div>
         </div>
         <div class="container-footer">
-        <img src="logolol.svg" class="logo">
-        <p>@adam @venalyn</p>
-
-    </div>
+            <img src="logolol.svg" class="logo">
+            <p>@adam @venalyn</p>
+        </div>
     </div>
 
     <script>
