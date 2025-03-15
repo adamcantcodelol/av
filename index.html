@@ -238,6 +238,10 @@
             font-weight: bold;
             pointer-events: none;
             transform: translate(-50%, -50%);
+            border: #3E2F3C solid 5px;
+            border-radius: 15px;
+            padding: 5px;
+            background-color: white;
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
         }
 
@@ -563,8 +567,8 @@
                 navigator.clipboard.writeText(resultText).catch(err => console.error("Copy failed:", err));
             }
 
-            const x = event.clientX;
-            const y = event.clientY - 20;
+            const x = event.clientX - 20;
+            const y = event.clientY - 150;
 
             notification.innerText = message;
             notification.style.left = `${x}px`;
@@ -575,12 +579,12 @@
 
             setTimeout(() => {
                 notification.classList.add('fade-out');
-            }, 500);
+            }, 750);
 
             setTimeout(() => {
                 notification.classList.remove('show', 'fade-out');
                 animating = false;
-            }, 1000);
+            }, 2000);
         }
 
         let emptyInputCount = 0;
