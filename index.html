@@ -232,29 +232,28 @@
         }
 
         .copy-notification {
-            position: absolute;
-            background-color: white;
+            position: fixed;
+            background-color: #ffffff;
             border: #3E2F3C solid 5px;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 8px;
             font-weight: bold;
-            font-size: 14px;
             opacity: 0;
             pointer-events: none;
             left: 50%;
-            transform: translateX(-50%) translateY(25px);
-            bottom: 40%;
-            transition: opacity 0.3s ease, transform 0.6s ease;
+            top: 60%;
+            transform: translate(-50%, 20px);
+            transition: opacity 0.3s ease, transform 0.4s ease;
         }
 
         .copy-notification.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translate(-50%, 0);
         }
 
         .copy-notification.fade-out {
             opacity: 0;
-            transform: translateX(-50%) translateY(-25px);
+            transform: translate(-50%, -20px);
         }
 
         .shake {
@@ -532,7 +531,6 @@
         }
 
         let animating = false;
-
         function copyResult(event) {
             if (animating) return;
 
@@ -548,31 +546,29 @@
                 navigator.clipboard.writeText(resultText).catch(err => console.error("Copy failed:", err));
             }
 
-<<<<<<< HEAD
-=======
-            const x = event.clientX - 20;
-            const y = event.clientY - 150;
-
->>>>>>> ee72a325b213af59454d9a845bb4d6e1b53ad991
             notification.innerText = message;
 
-            animating = true;
-            notification.classList.add('show');
+            if (!document.body.contains(notification)) {
+                document.body.appendChild(notification);
+            }
+
+            notification.classList.remove('show');
+            notification.classList.remove('fade-out');
 
             setTimeout(() => {
-<<<<<<< HEAD
-                notification.classList.remove('show');
-                animating = false;
-            }, 1500);
-=======
-                notification.classList.add('fade-out');
-            }, 750);
+                animating = true;
+                notification.classList.add('show');
 
-            setTimeout(() => {
-                notification.classList.remove('show', 'fade-out');
-                animating = false;
-            }, 2000);
->>>>>>> ee72a325b213af59454d9a845bb4d6e1b53ad991
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.classList.add('fade-out');
+
+                    setTimeout(() => {
+                        notification.classList.remove('fade-out');
+                        animating = false;
+                    }, 400);
+                }, 1000);
+            }, 10);
         }
 
         let emptyInputCount = 0;
