@@ -385,7 +385,7 @@
                 </div>
             </div>
 
-            <div id="result" class="result-area">Result</div>
+            <div id="result" class="result-area">Result⠀</div>
         </div>
 
         <div id="videos" class="content">
@@ -540,7 +540,7 @@
             if (!resultElement || !notification) return;
 
             const resultText = resultElement.innerText.trim();
-            const message = resultText && resultText !== "Result" ? "Copied!" : "Why would you copy this?";
+            const message = resultText && resultText !== "Result⠀" ? "Copied!" : "Why would you copy this?";
 
             if (resultText && resultText !== "Result") {
                 navigator.clipboard.writeText(resultText).catch(err => console.error("Copy failed:", err));
