@@ -233,45 +233,32 @@
 
         .copy-notification {
             position: absolute;
-            opacity: 0;
-            font-size: 16px;
+            background-color: white;
+            border: #3E2F3C solid 5px;
+            border-radius: 10px;
+            padding: 8px;
             font-weight: bold;
+            font-size: 14px;
+            opacity: 0;
             pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            left: 50%;
+            transform: translateX(-50%) translateY(25px);
+            bottom: 40%;
+            transition: opacity 0.3s ease, transform 0.6s ease;
         }
 
         .copy-notification.show {
             opacity: 1;
-            transform: translate(-50%, -80%);
+            transform: translateX(-50%) translateY(0);
         }
 
         .copy-notification.fade-out {
             opacity: 0;
-            transform: translate(-50%, -100%);
+            transform: translateX(-50%) translateY(-25px);
         }
 
         .shake {
             animation: shake 0.5s ease-in-out;
-        }
-
-        .top-elements {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-        }
-
-        .top-left img {
-            width: 100px;
-            height: auto;
-        }
-
-        .top-left,
-        .top-right {
-            padding: 10px;
         }
 
         .logo {
@@ -546,7 +533,6 @@
 
         let animating = false;
 
-
         function copyResult(event) {
             if (animating) return;
 
@@ -556,31 +542,21 @@
             if (!resultElement || !notification) return;
 
             const resultText = resultElement.innerText.trim();
-            // if you understand what the thing below me does, im sorry :skull:
             const message = resultText && resultText !== "Result" ? "Copied!" : "Why would you copy this?";
 
             if (resultText && resultText !== "Result") {
                 navigator.clipboard.writeText(resultText).catch(err => console.error("Copy failed:", err));
             }
 
-            const x = event.clientX;
-            const y = event.clientY - 20;
-
             notification.innerText = message;
-            notification.style.left = `${x}px`;
-            notification.style.top = `${y}px`;
 
             animating = true;
             notification.classList.add('show');
 
             setTimeout(() => {
-                notification.classList.add('fade-out');
-            }, 500);
-
-            setTimeout(() => {
-                notification.classList.remove('show', 'fade-out');
+                notification.classList.remove('show');
                 animating = false;
-            }, 1000);
+            }, 1500);
         }
 
         let emptyInputCount = 0;
