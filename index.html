@@ -548,15 +548,31 @@
                 navigator.clipboard.writeText(resultText).catch(err => console.error("Copy failed:", err));
             }
 
+<<<<<<< HEAD
+=======
+            const x = event.clientX - 20;
+            const y = event.clientY - 150;
+
+>>>>>>> ee72a325b213af59454d9a845bb4d6e1b53ad991
             notification.innerText = message;
 
             animating = true;
             notification.classList.add('show');
 
             setTimeout(() => {
+<<<<<<< HEAD
                 notification.classList.remove('show');
                 animating = false;
             }, 1500);
+=======
+                notification.classList.add('fade-out');
+            }, 750);
+
+            setTimeout(() => {
+                notification.classList.remove('show', 'fade-out');
+                animating = false;
+            }, 2000);
+>>>>>>> ee72a325b213af59454d9a845bb4d6e1b53ad991
         }
 
         let emptyInputCount = 0;
