@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption & Decryption</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.cdnfonts.com/css/gotham-rounded');
 
@@ -273,10 +272,6 @@
             animation: shake 0.5s ease-in-out;
         }
 
-        .logo {
-            height: 70px;
-        }
-
         .container-footer {
             display: flex;
             justify-content: space-between;
@@ -286,8 +281,8 @@
 
         .container-footer p {
             margin: 0 10px;
-            background-size: 1080px;
             font-size: 10px;
+            overflow: hidden;
         }
 
         @keyframes tilt-container {
@@ -407,7 +402,7 @@
             <div class="video-grid">
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/6-JjHa-qLPk" frameborder="0"
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/6-JjHa-qLPk" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
@@ -421,7 +416,7 @@
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/5wFyZJ8yH9Q" frameborder="0"
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/5wFyZJ8yH9Q" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
@@ -435,7 +430,7 @@
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/NuyzuNBFWxQ" frameborder="0"
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/NuyzuNBFWxQ" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
@@ -448,7 +443,7 @@
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/TImdsUglGv4" frameborder="0"
+                        <iframe loading="lazy" width="560" height="315" src="https://www.youtube.com/embed/TImdsUglGv4" frameborder="0"
                             allowfullscreen></iframe>
                     </div>
                     <div class="video-info">
@@ -522,7 +517,7 @@
             </div>
         </div>
         <div class="container-footer">
-            <img src="logolol.webp" class="logo">
+            <img src="logolol.webp" height="70px" width="200">
             <p>@adam @venalyn</p>
         </div>
     </div>
