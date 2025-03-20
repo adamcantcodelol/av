@@ -8,9 +8,14 @@
         content="A web-based encryption and decryption tool that I probably wont update since this was a one off school assignment.">
     <meta name="keywords" content="encryption, decryption, caesar cipher, cryptography, brute force">
     <title>Encryption & Decryption</title>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap"></noscript>
     <style>
+        @font-face {
+            font-family: 'Nunito';
+            src: url('Nunito.woff2') format('woff2'),
+                url('Nunito.woff') format('woff'); 
+            font-weight: 600 ;
+         }
+
         * {
             margin: 0;
             padding: 0;
@@ -37,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('icons.webp');
+            background-image: url('icons.webp?v1');
             background-size: 25vw;
             background-repeat: repeat;
             animation: scroll-background 30s linear infinite;
@@ -520,7 +525,7 @@
             </div>
         </div>
         <div class="container-footer">
-            <img src="logolol.webp" alt="Image of a logo" height="70px" width="200">
+            <img src="logolol.webp?v1" alt="Image of a logo" loading="lazy" height="70px" width="200">
             <p>@adam @venalyn</p>
         </div>
     </div>
